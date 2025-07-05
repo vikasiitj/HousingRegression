@@ -1,0 +1,49 @@
+name: ML Pipeline CI
+
+on:
+  push:
+    branches: [ master, reg_branch, hyper_branch ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run data loading test
+      run: |
+        python -c "
+        from utils import load_data
+        df = load_data()
+        print('Data loaded successfully!')
+        print(f'Dataset shape: {df.shape}')
+        assert df.shape[0] > 0, 'Dataset is empty'
+        assert 'MEDV' in df.columns, 'Target column missing'
+        print('All tests passed!')
+        "
+
+    - name: Run regression pipeline
+      run: |
+        python regression.py
+
+    - name: Check for output files
+      run: |
+        ls -la
+        if [ -f "baseline_results.txt" ] || [ -f "hypertuned_results.txt" ]; then
+          echo "Results file found!"
+        else
+          echo "Warning: No results file found"
+        fi

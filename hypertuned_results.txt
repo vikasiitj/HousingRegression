@@ -1,0 +1,33 @@
+Model Performance Results
+==================================================
+
+Model: Lasso Regression (Baseline)
+MSE: 27.5777
+R²: 0.6239
+RMSE: 5.2514
+------------------------------
+Model: Ridge Regression (Baseline)
+MSE: 24.3129
+R²: 0.6685
+RMSE: 4.9308
+------------------------------
+Model: Random Forest (Baseline)
+MSE: 7.9127
+R²: 0.8921
+RMSE: 2.8130
+------------------------------
+Model: Lasso Regression (Tuned)
+MSE: 24.3335
+R²: 0.6682
+RMSE: 4.9329
+------------------------------
+Model: Ridge Regression (Tuned)
+MSE: 24.3129
+R²: 0.6685
+RMSE: 4.9308
+------------------------------
+Model: Random Forest (Tuned)
+MSE: 9.1265
+R²: 0.8755
+RMSE: 3.0210
+------------------------------
